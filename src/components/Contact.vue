@@ -1,6 +1,7 @@
 <script setup>
     import { reactive, ref } from 'vue'
     import axios from 'axios'
+    import { API_ENDPOINTS, API_HOST } from "../constants/config.js"
 
     const props = defineProps({
         _id: String,
@@ -9,11 +10,6 @@
         phone: String,
         email: String
     })
-
-    const API_HOST = "http://localhost:8080/api/v1"
-    const API_ENDPOINTS = {
-        contact: '/contact'
-    }
   
     let errorMessage = ref('')
 
@@ -82,6 +78,14 @@ template {
     flex-direction: column;
 }
 
+#avatar {
+    background-image: url("../assets/profile.png");
+    border-radius: 50px;
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+}
+
 @media only screen and (max-width: 700px) {
     #name {
         font-size: 1em;
@@ -89,13 +93,6 @@ template {
     .card {
     margin-top: 50px;
         width: 80%;
-    }
-    #avatar{
-        border-radius: 50px;
-        width: 50px;
-        height: 50px;
-        background-image: url("../assets/raw.jpg");
-        background-size: cover;
     }
     #email, #phone {
         margin-left: 30px;
@@ -115,13 +112,6 @@ template {
     .card {
     margin-top: 50px;
         width: 50%;
-    }
-    #avatar{
-        border-radius: 50px;
-        width: 50px;
-        height: 50px;
-        background-image: url("../assets/raw.jpg");
-        background-size: cover;
     }
     #email, #phone {
         margin-left: 30px;

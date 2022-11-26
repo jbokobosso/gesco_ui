@@ -4,19 +4,10 @@
   import Form from './components/Form.vue'
   import { onMounted } from 'vue'
   import axios from 'axios'
+  import { API_ENDPOINTS, API_HOST } from "./constants/config.js"
 
-  const API_HOST = "http://localhost:8080/api/v1"
-  const API_ENDPOINTS = {
-      contact: '/contact'
-  }
-
-  const state = reactive({ count: 0 })
   const contactList = ref([])
   let errorMessage = ref('')
-
-  function increment() {
-    state.count++
-  }
 
   onMounted(() => {
     getUsers()

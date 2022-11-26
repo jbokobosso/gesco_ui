@@ -1,11 +1,7 @@
 <script setup>
     import { reactive, ref } from 'vue'
     import axios from 'axios'
-
-    const API_HOST = "http://localhost:8080/api/v1"
-    const API_ENDPOINTS = {
-        contact: '/contact'
-    }
+    import { API_ENDPOINTS, API_HOST } from "../constants/config.js"
 
  
 
