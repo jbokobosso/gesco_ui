@@ -1,15 +1,20 @@
 <script setup>
-
+    const props = defineProps({
+        firstname: String,
+        lastname: String,
+        phone: String,
+        email: String
+    })
 </script>
 
 <template class="card-container">
     <div class="card">
-        <h1 id="name">Josué BOKOBOSSO</h1>
+        <h1 id="name">{{firstname}} {{lastname.toUpperCase()}}</h1>
         <div id="card-items">
             <div id="avatar"></div>
             <div id="infos">
-                <a id="phone" href="tel:++22899885825">+22899885825</a>
-                <span id="email">technonovich@gmail.com</span>
+                <a id="phone" href="tel:{{phone}}">{{phone}}</a>
+                <span id="email">{{email}}</span>
             </div>
         </div>
             <button id="suppress">Supprimer</button>

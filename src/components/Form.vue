@@ -32,6 +32,7 @@
                 formValue = {}
                 errorMessage.value = ""
                 alert("Merci !")
+                window.location.href = "/"
             }
         } catch(exception) {
             errorMessage.value = exception.response.data.message
