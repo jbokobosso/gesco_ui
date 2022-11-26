@@ -2,12 +2,35 @@
   import { reactive, ref } from 'vue'
   import Contact from './components/Contact.vue'
   import Form from './components/Form.vue'
+  import { onMounted } from 'vue'
+  import axios from 'axios'
+
+  const API_HOST = "http://localhost:8080/api/v1"
+  const API_ENDPOINTS = {
+      contact: '/contact'
+  }
 
   const state = reactive({ count: 0 })
   const contactList = ref([1,5,4,5,8,9,6,3,2,5])
+  let errorMessage = ref('')
 
   function increment() {
     state.count++
+  }
+
+  onMounted(() => {
+    getUsers()
+  })
+
+  async function getUsers() {
+      try{
+          var response = await axios.get(API_HOST+API_ENDPOINTS.contact)
+          if(response.status == 200) {
+              contactList.value = response.data
+          }
+      } catch(exception) {
+          errorMessage.value = exception.response.data.message
+      }
   }
 </script>
 

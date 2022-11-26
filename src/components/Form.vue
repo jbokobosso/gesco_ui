@@ -2,6 +2,13 @@
     import { reactive, ref } from 'vue'
     import axios from 'axios'
 
+    const API_HOST = "http://localhost:8080/api/v1"
+    const API_ENDPOINTS = {
+        contact: '/contact'
+    }
+
+ 
+
     let errorMessage = ref('')
     const firstname = ref('')
     const lastname = ref('')
@@ -20,7 +27,7 @@
 
     async function createUser(formValue) {
         try{
-            var response = await axios.post('http://localhost:8080/api/v1/contact', formValue, { contentType: 'JSON' })
+            var response = await axios.post(API_HOST+API_ENDPOINTS.contact, formValue, { contentType: 'JSON' })
             if(response.status == 200) {
                 formValue = {}
                 errorMessage.value = ""
