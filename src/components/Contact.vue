@@ -1,10 +1,34 @@
 <script setup>
+    import { reactive, ref } from 'vue'
+    import axios from 'axios'
+
     const props = defineProps({
+        _id: String,
         firstname: String,
         lastname: String,
         phone: String,
         email: String
     })
+
+    const API_HOST = "http://localhost:8080/api/v1"
+    const API_ENDPOINTS = {
+        contact: '/contact'
+    }
+  
+    let errorMessage = ref('')
+
+    async function deleteContact() {
+      try{
+          var response = await axios.delete(API_HOST+API_ENDPOINTS.contact+"/"+props._id)
+          if(response.status == 200) {
+            errorMessage.value = ''
+            alert('Contact supprié')
+            window.location.href = '/'
+          }
+      } catch(exception) {
+          errorMessage.value = exception.response.data.message
+      }
+  }
 </script>
 
 <template class="card-container">
@@ -17,8 +41,11 @@
                 <span id="email">{{email}}</span>
             </div>
         </div>
-            <button id="suppress">Supprimer</button>
+        <button @click="deleteContact" id="suppress">Supprimer</button>
     </div>
+    <p id="error-message" v-if="errorMessage != ''">
+        {{errorMessage}}
+    </p>
 </template>
 
 <style>
